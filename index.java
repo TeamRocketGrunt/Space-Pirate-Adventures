@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 class index{
@@ -7,10 +8,32 @@ class index{
   public static String bodyPart;
 
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException{
     Scanner scan = new Scanner(System.in);
-    System.out.println("Welcome to the Space Pirate Adventure. You are the captain of the dreaded Donkey Hotey. Once your ship ruled the depths of space, but you've fallen on hard times. What is your name? ");
+
+    File story = new File("story.txt");
+    Scanner storyReader = new Scanner(story);
+    
+    System.out.println(storyReader.nextLine());
     name = scan.nextLine();
-    System.out.print(name);
+
+    System.out.println(storyReader.nextLine());
+    bodyPart = scan.nextLine();
+
+    verify(scan);
+
+
+  }
+
+  public static void verify(Scanner scan){
+    System.out.println("Captain "+name+", you have lost your " +bodyPart+". Is that correct? (Y/N)");
+    String answer = scan.nextLine();
+    if(answer.toLowerCase().equals("y")){
+      System.out.print("Please enter your name: ");
+      name = scan.nextLine();
+      System.out.print("You lost your: ");
+      bodyPart = scan.nextLine();
+      verify(scan);
+    }
   }
 }
